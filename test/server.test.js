@@ -2606,3 +2606,27 @@ test('should cleanup queue on uncaughtExceptions', function (t) {
         t.end();
     });
 });
+
+
+test('should show debug information', function (t) {
+
+    SERVER.get('/foo', function foo(req, res, next) {
+        res.end();
+        return next();
+    });
+
+    SERVER.get('/bar/:a/:b', function bar(req, res, next) {
+        res.end();
+        return next();
+    });
+
+    SERVER.get(/^\/([a-zA-Z0-9_\.~-]+)\/(.*)/,
+    function freeform(req, res, next) {
+        res.end();
+        return next();
+    });
+
+    var debugInfo = SERVER.getDebugInfo();
+
+
+});
